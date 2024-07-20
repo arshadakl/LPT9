@@ -24,8 +24,6 @@ const Bg = () => {
             repeat: -1,
             ease: 'power2.out'
         });
-
-        // Bottom spotlight animation
         gsap.to(spotlightBottomRef.current, {
             y: '-10.7975%',
             x: '-10.7975%',
@@ -42,15 +40,15 @@ const Bg = () => {
 
     return (
         <div className="bg-cover bg-[#0f0f0f] overflow-hidden h-screen w-screen">
-            <div className=' absolute w-full h-full'>
+            <div className=' absolute w-full h-full z-20' >
                 <Frame />
             </div>
 
-            <div className="z-0 ">
+            <div className="">
                 <div
                     ref={spotlightTopRef}
-                    className="relative blur-3xl aspect-square md:w-1/3 w-2/3 left-2/3 top-1/4 spotlight-top "
-                    style={{ zIndex: 10 }}
+                    className="relative blur-3xl cursor-pointer aspect-square md:w-1/3 w-2/3 left-2/3 top-1/4 spotlight-top "
+                    style={{ zIndex: 1 }}
                 >
                     <div
                         ref={spotlightTopInnerRef}
