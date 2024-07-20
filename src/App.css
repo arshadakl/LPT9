@@ -24,3 +24,22 @@
     scrollbar-color: #91d1f8 #000000; 
     scrollbar-width: thin; 
 }
+
+/* .card {
+    @apply bg-zinc-900/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90 border border-slate-100/40 w-64;
+  }
+  @media (max-width: 768px) {
+    .card {
+      width: calc(100% - 20px); 
+      margin: 10px; 
+    }
+  }
+   */
+
+   @keyframes blink {
+    0%, 49% { background: #ffffff; }
+    50%, 100% { background: transparent; }
+  }
+  .animate-blink {
+    animation: blink 1.2s linear infinite;
+  }
