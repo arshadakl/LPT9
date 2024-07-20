@@ -99,7 +99,9 @@ export const Bio2 = () => {
 export const Bio3 = () => {
     return (
         <>
-            <p>1. Nice to meet you! I'm Arshad, a Full-Stack Developer3.</p>
+            <div className='bg-bl/70 hover:bg-bl/65 transition duration-300 ease-in w-full h-full bg-cover overflow-hidden'>
+        <img src="/arshad.png" className='hover:scale-110 scale-105 h-96 transition duration-1000 ease-out' alt="" />
+            </div>
         </>
     );
 };
@@ -134,7 +136,7 @@ function DragComponent() {
             return [
                 { id: 1, initialPosition: { x: 50, y: 50 }, title: "about-me", data: Bio1 },
                 { id: 2, initialPosition: { x: 700, y: 350 }, title: "skills", data: Bio2 },
-                { id: 3, initialPosition: { x: 140, y: 550 }, title: "portrait", data: Bio3 },
+                { id: 3, initialPosition: { x: 250, y: 530 }, title: "portrait", data: Bio3 },
                 { id: 4, initialPosition: { x: 880, y: 150 }, title: "me—online", data: Bio4 },
             ];
         }
@@ -147,7 +149,7 @@ function DragComponent() {
             if (parentRef.current) {
                 setParentDimensions({
                     width: parentRef.current.offsetWidth,
-                    height: parentRef.current.offsetHeight+300,
+                    height: parentRef.current.offsetHeight+350,
                 });
             }
 
