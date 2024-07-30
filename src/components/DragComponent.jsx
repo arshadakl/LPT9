@@ -99,8 +99,8 @@ export const Bio2 = () => {
 export const Bio3 = () => {
     return (
         <>
-            <div className='bg-bl/70 hover:bg-bl/65 transition duration-300 ease-in w-full h-full bg-cover overflow-hidden'>
-        <img src="/arshad.png" className='hover:scale-110 scale-105 h-96 transition duration-1000 ease-out' alt="" />
+            <div className='bg-bl/70 select-none  hover:bg-bl/55 transition duration-300 ease-in w-full  bg-cover overflow-hidden'>
+                {/* <img src="/arshad.png" className='select-none hover:scale-110 scale-125 h-64 transition duration-1000 ease-out' alt="" /> */}
             </div>
         </>
     );
@@ -127,17 +127,17 @@ function DragComponent() {
     const getInitialPositions = () => {
         if (window.innerWidth < 768) { // Mobile view
             return [
-                { id: 1, initialPosition: { x: 0, y: 10 }, title: "about-me", data: Bio1 },
-                { id: 2, initialPosition: { x: 0, y: 940 }, title: "skills", data: Bio2 },
-                { id: 3, initialPosition: { x: 0, y: 1570 }, title: "portrait", data: Bio3 },
-                { id: 4, initialPosition: { x: 50, y: 1390 }, title: "me—online", data: Bio4 },
+                { id: 1, initialPosition: { x: 0, y: 10 }, title: "about-me", pos: "right", data: Bio1 },
+                { id: 2, initialPosition: { x: 0, y: 940 }, title: "skills", pos: "left", data: Bio2 },
+                { id: 3, initialPosition: { x: 0, y: 1570 }, title: "portrait", pos: "right", data: Bio3 },
+                { id: 4, initialPosition: { x: 50, y: 1390 }, title: "me—online", pos: "up", data: Bio4 },
             ];
         } else { // Desktop view
             return [
-                { id: 1, initialPosition: { x: 50, y: 50 }, title: "about-me", data: Bio1 },
-                { id: 2, initialPosition: { x: 700, y: 350 }, title: "skills", data: Bio2 },
-                { id: 3, initialPosition: { x: 250, y: 530 }, title: "portrait", data: Bio3 },
-                { id: 4, initialPosition: { x: 880, y: 150 }, title: "me—online", data: Bio4 },
+                { id: 1, initialPosition: { x: 330, y: 50 }, title: "about-me", pos: "right", data: Bio1 },
+                { id: 2, initialPosition: { x: 520, y: 550 }, title: "skills", pos: "left", data: Bio2 },
+                { id: 3, initialPosition: { x: 200, y: 500 }, title: "portrait", pos: "right", data: Bio3 },
+                { id: 4, initialPosition: { x: 980, y: 400 }, title: "me—online", pos: "up", data: Bio4 },
             ];
         }
     };
@@ -149,7 +149,7 @@ function DragComponent() {
             if (parentRef.current) {
                 setParentDimensions({
                     width: parentRef.current.offsetWidth,
-                    height: parentRef.current.offsetHeight+350,
+                    height: parentRef.current.offsetHeight, // Remove the +500 if not needed
                 });
             }
 
@@ -185,17 +185,18 @@ function DragComponent() {
 
 
     return (
-        <div ref={parentRef} className="w-full h-full relative ">
+        <div ref={parentRef} className="w-full min-h-screen  relative">
             {childCards.map((card) => (
                 <FrameCard
                     key={card.id}
                     initialPosition={card.initialPosition}
                     parentWidth={parentDimensions.width}
-                    parentHeight={parentDimensions.height}
+                    parentHeight={parentDimensions.height + 500}
                     zIndex={zIndices[card.id]}
                     onDragStart={() => handleDragStart(card.id)}
                     Data={card.data}
                     title={card.title}
+                    pos={card.pos}
                 />
             ))}
         </div>

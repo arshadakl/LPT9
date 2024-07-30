@@ -19,11 +19,22 @@
     border: 1px solid #f1f1f1; 
 }
 
-/* Firefox scrollbar styles */
 .custom-scrollbar {
     scrollbar-color: #91d1f8 #000000; 
     scrollbar-width: thin; 
 }
+
+
+
+/* .custom-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; 
+} */
+
 
 /* .card {
     @apply bg-zinc-900/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90 border border-slate-100/40 w-64;
@@ -43,3 +54,6 @@
   .animate-blink {
     animation: blink 1.2s linear infinite;
   }
+
+
+  

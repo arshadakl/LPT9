@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Frame from './Frame';
+import { fadeIn } from '../gsap/Framer';
+
 
 const Bg = () => {
     const spotlightTopRef = useRef(null);
@@ -39,7 +41,8 @@ const Bg = () => {
     }, []);
 
     return (
-        <div className="bg-cover bg-[#0f0f0f] overflow-hidden h-screen w-screen">
+        <div
+        className="bg-cover bg-[#0f0f0f] overflow-hidden h-screen w-screen">
             <div className=' absolute w-full h-full z-20' >
                 <Frame />
             </div>
@@ -86,7 +89,7 @@ const Bg = () => {
                     ></div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

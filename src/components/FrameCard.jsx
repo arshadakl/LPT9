@@ -1,12 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { fadeIn } from '../gsap/Framer';
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
 
-function FrameCard({ initialPosition = { x: 0, y: 0 }, parentWidth = 0, parentHeight = 0, zIndex, onDragStart, Data,title }) {
+function FrameCard({ initialPosition = { x: 0, y: 0 }, parentWidth = 0, parentHeight = 0, zIndex, onDragStart, Data, title, pos }) {
   const [position, setPosition] = useState(initialPosition);
   const [isDragging, setIsDragging] = useState(false);
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
   const lastPositionRef = useRef({ x: 0, y: 0 });
   const lastTimeRef = useRef(0);
+
+  // Use GSAP
+  useEffect(() => {
+    if (cardRef.current) {
+      gsap.fromTo(cardRef.current, { opacity: 0 }, { opacity: 1, duration: 1 });
+    }
+  }, []);
 
   const constrainPosition = (pos) => {
     if (!cardRef.current) return pos;
@@ -94,25 +104,28 @@ function FrameCard({ initialPosition = { x: 0, y: 0 }, parentWidth = 0, parentHe
   }, [isDragging]);
 
   return (
-    <div
-      ref={cardRef}
-      className="card select-none bg-zinc-900/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90 border border-slate-100/40 w-lg min-w-56 md:max-w-[700px]  "
-      style={{
+    <motion.div
+    ref={cardRef}
+    variants={fadeIn(pos, 0.2)}
+    initial="hidden"
+    whileInView={"show"}
+    viewport={{ once: true }}
+    className="card select-none bg-zinc-900/50 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90 border border-slate-100/40 w-lg min-w-56 md:max-w-[700px] min-h-[200px]" // Add min-h-[200px] or adjust as needed
+    style={{
         position: 'absolute',
         left: `${position.x}px`,
         top: `${position.y}px`,
-        zIndex: zIndex, // Apply the z-index here
-      }}
+        zIndex: zIndex,
+    }}
     >
       <div
         className="flex justify-between items-center bg-[#000]/50 rounded-t-lg"
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
         onMouseDown={handleMouseDown}
       >
-         <p className="title text-gray-200  ml-2 mt-2 px-3 cursor-pointer text-sm  font-fcode">{title}</p>
+        <p className="title text-gray-200  ml-2 mt-2 px-3 cursor-pointer text-sm  font-fcode">{title}</p>
         <span className="flex space-x-1">
-            
-          <button  className="w-10 h-9 -ml-10 cursor-pointer transition-colors duration-200 hover:bg-white/20">
+          <button className="w-10 h-9 -ml-10 cursor-pointer transition-colors duration-200 hover:bg-white/20">
             <svg viewBox="0 0 10.2 1" className="w-2.5 h-2.5 mx-auto">
               <rect height={1} width="10.2" y="50%" x={0} fill="white" />
             </svg>
@@ -135,10 +148,10 @@ function FrameCard({ initialPosition = { x: 0, y: 0 }, parentWidth = 0, parentHe
       <div className="topfix bg-[#000]/50 w-full" />
       <hr className="border-t border-slate-100/50" />
       <div style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-        onMouseDown={handleMouseDown}  className="content  custom-scrollbar font-fcode text-slate-100  h-full ">
+        onMouseDown={handleMouseDown} className="content  custom-scrollbar font-fcode text-slate-100  h-full ">
         <Data />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
